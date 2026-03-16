@@ -8,7 +8,7 @@
   "scripts": {
     "build": "nest build",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
-    "start": "nest start --entryFile backend/src/main.js",
+    "start": "NODE_OPTIONS=--max-old-space-size=256 nest start --entryFile backend/src/main.js",
     "start:dev": "nest start --watch --entryFile backend/src/main.js",
     "start:debug": "nest start --debug --watch",
     "start:prod": "node dist/main",
