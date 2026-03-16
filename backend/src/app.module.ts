@@ -8,14 +8,15 @@ import { YoutubeModule } from './modules/youtube/youtube.module';
 import { HealthModule } from './modules/health/health.module';
 import { VibeModule } from './modules/vibe/vibe.module';
 import { ServeStaticModule } from '@nestjs/serve-static';
-import { join } from 'path';
+import path from 'path';
+
+export const IMAGES_DIR = path.join(__dirname, '..', 'images');
 
 @Module({
   imports: [
     ServeStaticModule.forRoot({
-      rootPath: join(__dirname, 'images'),
+      rootPath: IMAGES_DIR,
       renderPath: '/images/:path',
-      serveStaticOptions: {},
     }),
     ConfigModule.forRoot({
       isGlobal: true,

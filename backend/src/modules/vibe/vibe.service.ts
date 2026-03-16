@@ -12,6 +12,7 @@ import { Socket, Server } from 'socket.io';
 import { WsEvents } from '@shared/ws';
 import path from 'path';
 import fs from 'node:fs/promises';
+import { IMAGES_DIR } from 'src/app.module';
 
 @Injectable()
 @WebSocketGateway(8080, { cors: { origin: '*' } })
@@ -48,17 +49,16 @@ export class VibeService implements OnGatewayInit {
 
   private async saveImage(imageContent: string, user: User) {
     try {
-      const imagesDir = path.join(__dirname, '..', '..', 'images');
-      await fs.mkdir(imagesDir, { recursive: true });
+      await fs.mkdir(IMAGES_DIR, { recursive: true });
 
       const fileName = `${user.userId}.${Date.now()}.png`;
 
-      const imagePath = path.join(imagesDir, fileName);
+      const imagePath = path.join(IMAGES_DIR, fileName);
       const HOST_URL = process.env.BACKEND_URL ?? '';
 
       await fs.writeFile(imagePath, Buffer.from(imageContent, 'base64'));
 
-      return `${HOST_URL}/${fileName}`;
+      return `${HOST_URL}/images/${fileName}`;
     } catch (error) {
       console.error(error);
       throw new Error('Failed to save image');
