@@ -11,8 +11,6 @@ export function App() {
 
   useSocket()
 
-
-
   if (isAuthCallbackPath()) {
     return <AuthCallbackPage />;
   }
