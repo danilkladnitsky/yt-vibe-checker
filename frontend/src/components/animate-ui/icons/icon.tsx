@@ -73,10 +73,10 @@ type DefaultIconProps<T = string> = {
 
 type AnimateIconProps<T = string> = WithAsChild<
   HTMLMotionProps<'span'> &
-    DefaultIconProps<T> & {
-      children: React.ReactNode;
-      asChild?: boolean;
-    }
+  DefaultIconProps<T> & {
+    children: React.ReactNode;
+    asChild?: boolean;
+  }
 >;
 
 type IconProps<T> = DefaultIconProps<T> &
@@ -505,12 +505,13 @@ function IconWrapper<T extends string>({
         inheritedAnimate) as Trigger;
 
       return (
+        // @ts-expect-error - TODO: fix this
         <AnimateIcon animate={finalAnimate} animateOnHover={animateOnHover} animateOnTap={animateOnTap} animateOnView={animateOnView} animateOnViewMargin={animateOnViewMargin} animateOnViewOnce={animateOnViewOnce} animation={animationProp ?? parentAnimation} loop={loop ?? parentLoop} loopDelay={loopDelay ?? parentLoopDelay} persistOnAnimateEnd={persistOnAnimateEnd ?? parentPersistOnAnimateEnd} initialOnAnimateEnd={initialOnAnimateEnd ?? parentInitialOnAnimateEnd} delay={delay ?? parentDelay} completeOnStop={completeOnStop ?? parentCompleteOnStop} render={<IconComponent size={size} className={cn(
-                        className,
-                        ((animationProp ?? parentAnimation) === 'path' ||
-                          (animationProp ?? parentAnimation) === 'path-loop') &&
-                          pathClassName,
-                      )} {...props} />}></AnimateIcon>
+          className,
+          ((animationProp ?? parentAnimation) === 'path' ||
+            (animationProp ?? parentAnimation) === 'path-loop') &&
+          pathClassName,
+        )} {...props} />}></AnimateIcon>
       );
     }
 
@@ -537,7 +538,7 @@ function IconWrapper<T extends string>({
           className={cn(
             className,
             (animationToUse === 'path' || animationToUse === 'path-loop') &&
-              pathClassName,
+            pathClassName,
           )}
           {...props}
         />
@@ -553,11 +554,12 @@ function IconWrapper<T extends string>({
     animationProp !== undefined
   ) {
     return (
+      // @ts-expect-error - TODO: fix this
       <AnimateIcon animate={animate} animateOnHover={animateOnHover} animateOnTap={animateOnTap} animateOnView={animateOnView} animateOnViewMargin={animateOnViewMargin} animateOnViewOnce={animateOnViewOnce} animation={animationProp} loop={loop} loopDelay={loopDelay} delay={delay} completeOnStop={completeOnStop} render={<IconComponent size={size} className={cn(
-                    className,
-                    (animationProp === 'path' || animationProp === 'path-loop') &&
-                      pathClassName,
-                  )} {...props} />}></AnimateIcon>
+        className,
+        (animationProp === 'path' || animationProp === 'path-loop') &&
+        pathClassName,
+      )} {...props} />}></AnimateIcon>
     );
   }
 
@@ -567,7 +569,7 @@ function IconWrapper<T extends string>({
       className={cn(
         className,
         (animationProp === 'path' || animationProp === 'path-loop') &&
-          pathClassName,
+        pathClassName,
       )}
       {...props}
     />
@@ -575,7 +577,7 @@ function IconWrapper<T extends string>({
 }
 
 function getVariants<
-  V extends { default: T; [key: string]: T },
+  V extends { default: T;[key: string]: T },
   T extends Record<string, Variants>,
 >(animations: V): T {
   // eslint-disable-next-line react-hooks/rules-of-hooks

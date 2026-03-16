@@ -4,7 +4,7 @@ import type { YoutubeSubscription } from "@shared/youtube"
 import { useEffect } from "react"
 import { io } from "socket.io-client"
 
-const SOCKET_URL = "ws://localhost:8080"
+const SOCKET_URL = import.meta.env.VITE_WS_URL
 
 const socketClient = io(SOCKET_URL)
 
